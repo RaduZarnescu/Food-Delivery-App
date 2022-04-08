@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Login - Shopme Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+    <style>
+        body{
+            /*background-image:url('images/food.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;  
+            background-size: auto;*/
+        }
+        .split{
+            height: 100%;
+            /*width: 50%;*/
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            /*padding-top: 20px;*/
+        }
+        .right {
+            right: 0;
+            width: 30%;
+            align-items: center;
+            justify-content: center;
+            
+
+        }
+        .right::before{
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /*top: 0;*/
+            /*left: 0;*/
+            z-index: 1;
+            content: '';
+            display: block;
+
+        }
+        .left{
+            left: 0;
+            width: 70%;
+            background-color: #FAEBD7;
+
+        }
+        .container-fluid{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .border{
+
+           
+            padding: 10%;
+            
+        }
+        .avatar{
+            vertical-align: middle;
+            width: 20%;
+            height: 20%;
+            border-radius: 50%;
+        }
+        
+        .form-group{
+            position: absolute;
+            top: 30%;
+            left: 40%;
+            transform: translate(-30%, -40%);
+            z-index: 10;
+            color:  white;
+
+        }
+       
+        .right .img{
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+         .bckgnd{
+            background-image: url('images/loginPhoto.jfif');
+        }
+
+
+        .textRight,
+        .signUP{
+            
+            text-align: center;
+        }
+        .button{
+            background: black;
+            opacity: 0.7;
+            color: white;
+            padding: 1em 2em;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: 0.25s ease all;
+        }
+        .button::hover{
+            background: #ffd346;
+            color: #000;
+        }
+       
+    </style>
+</head>
+<body>
+
+
+<!-- stanga -->
+<div class="split left">
+    <div th:if="${param.error}" style="text-align: center;">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+    </div>
+    <div class="container-fluid">
+        <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+            <div th:if="${param.logout}">
+                <p class="text-warning">You have been logged out.</p>
+            </div>
+
+            <div class="border">
+                <img src="images/img_avatar.png" alt="Avatar" class="avatar">
+                <p>Welcome back</p>
+                <p>
+                    <input type="email" name="email" class="form-control" placeholder="E-mail" required autofocus/>
+                </p>
+                <p>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required />
+                </p>
+                <p>
+                    <input type="submit" value="Sign In" class="btn btn-primary" />
+                </p>
+            </div>
+        
+        </form>
+    </div>
+</div>
+<div class="split right">
+    <div class="img bckgnd"></div>
+    <div class="form-group">
+        <div class="signUP">
+            <h1>New here?</h1>
+            <!-- <h2>dadad</h2> -->
+            <p class="textRight">Sign up for free and order the food you want to eat! </p>
+        
+            <a class="button" href="/" th:href="@{/register}">Register here</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

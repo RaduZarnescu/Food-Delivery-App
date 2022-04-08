@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+<style>
+body {
+    background-image: url('images/food.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+}
+ul {
+    background: rgba(0,0,0, 0.3);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+}
+
+li {
+
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+   
+}
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+}
+
+li.dropdown {
+    display: inline-block;
+}   
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    min-width: 10px;
+    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 10px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+
+}
+
+.dropdown-content a:hover {
+    background-color: #111;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.centerBox{
+    
+    background: rgba(0, 0, 0, 0.7);
+    width: 45%;
+    height: 25%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+.text{
+    color: white;
+    text-align: center;
+
+}
+</style>
+</head>
+<body>
+
+
+<ul>
+  <li><a href="#home"><i class="fa fa-home"> Home</i></a></li>
+  <li><a th:href="@{/restaurants}">Restaurants</a></li>
+  <li><a href="#orders">Orders</a></li>
+    <li sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+        <a href="/edit">Edit Products</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+        <a href="/editRestaurants">Edit Restaurants</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ADMIN')">
+        <a href="/users">View Users</a>
+    </li>
+  <li style="float: right;"><a th:href="@{/cart}"><i class="fa fa-shopping-cart"></i></a></li>
+  <li class="dropdown" style="float: right;">
+    <a href="javascript:void(0)" class="fa fa-fw fa-user"></a>
+    <div class="dropdown-content">
+      <a href="#">Settings</a>
+<!--      <a href="#">Logout</a>-->
+        <form id = 'logout_form' th:action="@{/logout}" method="post">
+            <a href="javascript:document.getElementById('logout_form').submit();">Logout</a>
+        </form>
+    </div>
+  </li>
+</ul>
+<div class="centerBox">
+    <p class="text">Hello</p>
+    <div>
+        <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    
+</div>
+</body>
+
+</html>
